@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="header">
+    <a [routerLink]="['italia','province']" style="text-decoration: none;"><h1 class="title">ITALIA</h1></a>
+    <div class="menu">
+      <div class="dropdown">
+        <button class="dropbtn">PROVINCE</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['italia','province']">Lista province</a>
+          <a [routerLink]="['italia','inserimento','provincia']">Inserimento provincia</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">COMUNI</button>
+        <div class="dropdown-content">
+          <a [routerLink]="['italia','comuni']">Lista comuni</a>
+          <a [routerLink]="['italia','inserimento','comune']">Inserimento comune</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div class="footer">
+    <p>© 2025 Our Company. All rights reserved</p>
+  </div>
+  
+</body>
+</html>
+

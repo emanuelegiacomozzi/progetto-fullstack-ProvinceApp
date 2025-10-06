@@ -1,0 +1,14 @@
+# Angular (frontend)
+frontend/node_modules/
+frontend/dist/
+
+# Java / Maven / Eclipse (backend)
+backend/target/
+backend/.classpath
+backend/.project
+backend/.settings/
+
+# File comuni da ignorare
+*.log
+*.env
+.DS_Store

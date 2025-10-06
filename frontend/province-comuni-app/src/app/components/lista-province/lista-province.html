@@ -1,0 +1,54 @@
+<div class="table-container">
+    <h2>PROVINCE ITALIANE</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sigla</th>
+                <th>Codice regionale</th>
+                <th>Tipologia</th>
+                <th>Comuni</th>
+                <th>Supreficie Km2</th>
+                <th>Codice sovracomunale</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of ProvincePaginate">
+                <td><a [routerLink]="['/italia', 'comuni', p.sigla_provincia]">{{p.denominazione_provincia}}</a></td>
+                <td>{{p.sigla_provincia}}</td>
+                <td>{{p.codice_regione}}</td>
+                <td>{{p.tipologia_provincia}}</td>
+                <td>{{p.numero_comuni}}</td>
+                <td>{{p.superficie_kmq}}</td>
+                <td>{{p.codice_sovracomunale}}</td>
+                <td>
+                    <button type="button" class="btn-elimina" (click)="elimina(p.sigla_provincia)">Elimina</button>
+                    <button type="button" class="btn-modifica" (click)="modifica(p.sigla_provincia)">Modifica</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="cambiaPagina(1)" style="cursor: pointer;">First</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="cambiaPagina(currentPage - 1)" style="cursor: pointer;">Previous</a>
+            </li>
+            <li class="page-item" *ngFor="let pagina of PagesBlock" [class.active]="currentPage === pagina">
+                <button class="page-link" (click)="cambiaPagina(pagina)">
+                    {{pagina}}
+                </button>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="cambiaPagina(currentPage + 1)" style="cursor: pointer;">Next</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="cambiaPagina(totalPages)" style="cursor: pointer;">Last</a>
+            </li>
+        </ul>
+    </nav>
+</div>

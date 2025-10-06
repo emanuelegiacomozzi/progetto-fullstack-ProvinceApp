@@ -1,0 +1,39 @@
+<div class="container mt-4" id="insert-container">
+    <h1>Modifica Provincia</h1>
+
+    <div class="container mt-4" style="background-color: rgb(205, 202, 202); padding:10px; border-radius: 5px;">
+        <div class="form-group mt-2">
+            <label>Denominazione provincia</label>
+            <input type="text" class="form-control" id="denom" [(ngModel)]="denom">
+        </div>
+
+        <div class="form-group mt-2" >
+            <label>Codice regione</label>
+            <input type="number" min="0" class="form-control" id="cod_reg" [(ngModel)]="cod_reg">
+        </div>
+
+        <div class="form-group mt-2">
+            <label>Tipologia provincia</label>
+            <input type="text" class="form-control" id="tip" [(ngModel)]="tip">
+        </div>
+
+        <div class="form-group mt-2">
+            <label>Numero comuni</label>
+            <input type="number" min="0" class="form-control" id="num_com" [(ngModel)]="num_com">
+        </div>
+
+        <div class="form-group mt-2">
+            <label>Superficie Kmq</label>
+            <input type="text" class="form-control" id="sup_kmq" [(ngModel)]="sup_kmq">
+        </div>
+
+        <div class="form-group mt-2">
+            <label>Codice sovracomunale</label>
+            <input type="number" class="form-control" id="cod_sov" [(ngModel)]="cod_sov">
+        </div>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+        <button class="btn btn primary" style="margin-top:10px; background-color: blue; color:white" (click)="Modifica()">Salva</button>
+    </div>
+</div>

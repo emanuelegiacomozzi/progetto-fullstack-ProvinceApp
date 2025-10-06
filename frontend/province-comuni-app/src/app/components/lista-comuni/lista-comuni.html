@@ -1,0 +1,63 @@
+<div class="table-container">
+    <h2>COMUNI ITALIANI</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Provincia</th>
+                <th>Codice istat</th>
+                <th>Altro nome italiano</th>
+                <th>Altro nome</th>
+                <th>Flag capoluogo</th>
+                <th>Codice belfiore</th>
+                <th>Latitudine</th>
+                <th>Longitudine</th>
+                <th>Supreficie Km2</th>
+                <th>Codice sovracomunale</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of comuniPaginati">
+                <td>{{c.denominazione_ita_altra}}</td>
+                <td>{{c.provincia?.sigla_provincia}}</td>
+                <td>{{c.codice_istat}}</td>
+                <td>{{c.denominazione_ita}}</td>
+                <td>{{c.denominazione_altra}}</td>
+                <td>{{c.flag_capoluogo}}</td>
+                <td>{{c.codice_belfiore}}</td>
+                <td>{{c.lat}}</td>
+                <td>{{c.lon}}</td>
+                <td>{{c.superficie_kmq}}</td>
+                <td>{{c.codice_sovracomunale}}</td>
+                <td>
+                    <button type="button" class="btn-elimina" (click)="elimina(c.codice_istat)">Elimina</button>
+                    <button type="button" class="btn-modifica" (click)="modifica(c.provincia?.sigla_provincia, c.codice_istat)">Modifica</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="cambiaPagina(1)" style="cursor: pointer;">First</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="cambiaPagina(currentPage - 1)" style="cursor: pointer;">Previous</a>
+            </li>
+            <li class="page-item" *ngFor="let pagina of PagesBlock" [class.active]="currentPage === pagina">
+                <button class="page-link" (click)="cambiaPagina(pagina)">
+                    {{pagina}}
+                </button>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="cambiaPagina(currentPage + 1)" style="cursor: pointer;">Next</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="cambiaPagina(totalPages)" style="cursor: pointer;">Last</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
