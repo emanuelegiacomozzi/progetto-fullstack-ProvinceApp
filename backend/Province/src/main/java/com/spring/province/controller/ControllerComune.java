@@ -38,9 +38,9 @@ public class ControllerComune {
 	@GetMapping("/provincia/{sigla_provincia}")
 	public List<ComuneDTO> getComuniByProvincia(@PathVariable String sigla_provincia){
 		
-		logger.info("Richiesta ricevuta per ottenere i comuni di {}" , sigla_provincia);
+		logger.info("Richiesta ricevuta per ottenere i comuni di {} " , sigla_provincia);
 		try {
-			logger.debug("Numero comuni trovati: {}", service.findByProvincia(sigla_provincia).size());
+			logger.debug("Numero comuni trovati: {} ", service.findByProvincia(sigla_provincia).size());
 		}catch(Exception e) {
 			logger.error("Errore nel caricamento dati" , e);
 			throw e;
@@ -50,12 +50,12 @@ public class ControllerComune {
 	
 	@PostMapping("/{sigla_provincia}")
 	public boolean insertComuneByProvincia(@RequestBody ComuneDTO comuneDTO, @PathVariable String sigla_provincia) {
-		logger.info("Richiesta ricevuta per l'inserimento del comune di {}", comuneDTO.getDenominazione_ita_altra());
+		logger.info("Richiesta ricevuta per l'inserimento del comune di {} ", comuneDTO.getDenominazione_ita_altra());
 		try {
-			logger.debug("Inserimento del comune di ", comuneDTO.getDenominazione_ita_altra() ," riuscito.");
+			logger.debug("Inserimento del comune di {} ", comuneDTO.getDenominazione_ita_altra() ," riuscito.");
 			return service.insert(comuneDTO, sigla_provincia);
 		}catch(Exception e) {
-			logger.error("Errore durante l'inserimento del comune di", comuneDTO.getDenominazione_ita_altra() , e);
+			logger.error("Errore durante l'inserimento del comune di {} " , comuneDTO.getDenominazione_ita_altra() , e);
 			throw e;
 		}
 	}
@@ -64,12 +64,12 @@ public class ControllerComune {
 	public boolean deleteComuneByCodice(@PathVariable int codice_istat) {
 		Optional<Comune> opt = daoComune.findById(codice_istat);
 		Comune comune = opt.get();
-		logger.info("Richiesta ricevuta per l'eliminazione del comune di ", comune.getDenominazione_ita_altra());
+		logger.info("Richiesta ricevuta per l'eliminazione del comune di {} ", comune.getDenominazione_ita_altra());
 		try {
-			logger.debug("Eliminazione del comune di " , comune.getDenominazione_ita_altra() , " effettuata correttamente");
+			logger.debug("Eliminazione del comune di {} " , comune.getDenominazione_ita_altra() , " effettuata correttamente");
 			return service.delete(codice_istat);
 		}catch(Exception e){
-			logger.error("Errore durante l'eliminazione del comune di", comune.getDenominazione_ita_altra() , e);
+			logger.error("Errore durante l'eliminazione del comune di {} ", comune.getDenominazione_ita_altra() , e);
 			throw e;
 		}
 	}
@@ -94,12 +94,12 @@ public class ControllerComune {
 	public boolean updateComuneByCodice(@PathVariable int codice_istat, @RequestBody ComuneDTO newComune) {
 		Optional<Comune> opt = daoComune.findById(codice_istat);
 		Comune comune = opt.get();
-		logger.info("Richiesta ricevuta per la modifica del comune di: {}", comune.getDenominazione_ita_altra());
+		logger.info("Richiesta ricevuta per la modifica del comune di {}", comune.getDenominazione_ita_altra());
 		try {
-			logger.debug("Modifica del comune di: {} " + comune.getDenominazione_ita_altra() + " avvenuta correttamente");
+			logger.debug("Modifica del comune di {} " + comune.getDenominazione_ita_altra() + " avvenuta correttamente");
 			return service.update(codice_istat, newComune);
 		}catch(Exception e) {
-			logger.error("Errore durante la modifca del comune di:{} "+ comune.getDenominazione_ita_altra(), e);
+			logger.error("Errore durante la modifca del comune di {} "+ comune.getDenominazione_ita_altra(), e);
 			throw e;
 		}
 	}
@@ -109,12 +109,12 @@ public class ControllerComune {
 	public ComuneDTO getComuneByProvincia(@PathVariable String sigla_provincia, @PathVariable int codice_istat) {
 		Optional<Comune> opt = daoComune.findById(codice_istat);
 		Comune comune = opt.get();
-		logger.info("Richiesta ricevuta per ottenere il comune di ", comune.getDenominazione_ita_altra());
+		logger.info("Richiesta ricevuta per ottenere il comune di {} ", comune.getDenominazione_ita_altra());
 		try {
-			logger.debug("Richiesta per ottenere il comune di ", comune.getDenominazione_ita_altra() ,"avvenuta correttamente");
+			logger.debug("Richiesta per ottenere il comune di {} ", comune.getDenominazione_ita_altra() ,"avvenuta correttamente");
 			return service.getComune(sigla_provincia, codice_istat);
 		}catch(Exception e) {
-			logger.error("Errore durante la richiesta del comune di ", comune.getDenominazione_ita_altra() , e);
+			logger.error("Errore durante la richiesta del comune di {} ", comune.getDenominazione_ita_altra() , e);
 			throw e;
 		}
 	}
