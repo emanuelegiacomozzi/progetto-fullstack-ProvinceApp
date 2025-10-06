@@ -1,6 +1,7 @@
 package com.spring.province.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.province.dao.DAOProvincia;
 import com.spring.province.dto.ProvinciaDTO;
 import com.spring.province.entity.Provincia;
 import com.spring.province.service.ServiceProvinciaImpl;
@@ -27,11 +29,14 @@ public class ControllerProvincia {
 	@Autowired
 	private ServiceProvinciaImpl service;
 	
+	@Autowired
+	private DAOProvincia daoProvincia;
+	
 	public static final Logger logger = LoggerFactory.getLogger(ControllerProvincia.class);
 	
 	@GetMapping()
 	public List<ProvinciaDTO> selectAll(){
-		logger.info("Richiesta ricevuta per province");
+		logger.info("Richiesta ricevuta per ottenere tutte le province");
 		try {
 			List<ProvinciaDTO> province = service.findAll();
 			logger.debug("Numero province trovate: {}", province.size());
@@ -44,24 +49,26 @@ public class ControllerProvincia {
 	
 	@PostMapping()
 	public boolean insertProvincia(@RequestBody ProvinciaDTO provinciaDTO){
-		logger.info("Richiesta ricevuta per l'inserimento di una provincia");
+		logger.info("Richiesta ricevuta per l'inserimento della provincia di ", provinciaDTO.getDenominazione_provincia());
 		try {
-			logger.debug("Inserimento riuscito ");
+			logger.debug("Inserimento della provincia di ", provinciaDTO.getDenominazione_provincia() , " riuscito.");
 			return service.insertProvincia(provinciaDTO);
 		}catch (Exception e) {
-			logger.error("Errore durante l'inserimento della provincia", e);
+			logger.error("Errore durante l'inserimento della provincia di ", provinciaDTO.getDenominazione_provincia() ,e);
 			throw e;
 		}
 	}
 	
 	@DeleteMapping("/{sigla_provincia}")
 	public boolean deleteProvincia(@PathVariable String sigla_provincia) {
-		logger.info("Richiesta ricevuta per l'eliminazione di una provincia");
+		Optional<Provincia> opt = daoProvincia.findById(sigla_provincia);
+		Provincia provincia = opt.get();
+		logger.info("Richiesta ricevuta per l'eliminazione della provincia di ", provincia.getDenominazione_provincia());
 		try {
-			logger.debug("Eliminazione riuscita");
+			logger.debug("Eliminazione della provincia di " , provincia.getDenominazione_provincia(), " riuscita.");
 			return service.deleteProvincia(sigla_provincia);
 		}catch(Exception e) {
-			logger.error("Errore durante l'eliminazione della provincia", e);
+			logger.error("Errore durante l'eliminazione della provincia di ", provincia.getDenominazione_provincia(), e);
 			throw e;
 		}
 	}
@@ -69,12 +76,14 @@ public class ControllerProvincia {
 	
 	@PatchMapping("/{sigla_provincia}")
 	public boolean updateProvincia(@PathVariable String sigla_provincia, @RequestBody ProvinciaDTO newProvincia) {
-		logger.info("Richiesta ricevuta per la modifica della provincia: {}", sigla_provincia);
+		Optional<Provincia> opt = daoProvincia.findById(sigla_provincia);
+		Provincia provincia = opt.get();
+		logger.info("Richiesta ricevuta per la modifica della provincia di", provincia.getDenominazione_provincia());
 		try {
-			logger.debug("Modifica riuscita");
+			logger.debug("Modifica della provincia di " , provincia.getDenominazione_provincia(), " riuscita.");
 			return service.updateProvincia(sigla_provincia,newProvincia);
 		}catch(Exception e) {
-			logger.error("Errore durante la modifica della provincia", e);
+			logger.error("Errore durante la modifica della provincia di",  provincia.getDenominazione_provincia() ,e);
 			throw e;
 		}
 	}
@@ -82,12 +91,14 @@ public class ControllerProvincia {
 	
 	@GetMapping("/{sigla_provincia}")
 	public ProvinciaDTO getProvincia(@PathVariable String sigla_provincia) {
-		logger.info("Richiesta ricevuta per la richiesta di una provincia");
+		Optional<Provincia> opt = daoProvincia.findById(sigla_provincia);
+		Provincia provincia = opt.get();
+		logger.info("Richiesta ricevuta per ottenere la provincia di ", provincia.getDenominazione_provincia());
 		try {
-			logger.debug("Richiesta avvenuta con successo");
+			logger.debug("Richiesta per ottenere la provincia di ", provincia.getDenominazione_provincia() ," avvenuta con successo");
 			return service.getProvincia(sigla_provincia);
 		}catch(Exception e){
-			logger.error("Errore durante la richiesta della provincia", e);
+			logger.error("Errore durante la richiesta della provincia di ", provincia.getDenominazione_provincia(), e);
 			throw e;
 		}
 	}
