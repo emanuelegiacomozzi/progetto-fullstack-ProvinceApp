@@ -4,6 +4,7 @@ import { Provincia } from '../../models/provincia';
 import { Comune } from '../../models/comune';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProvinciaService } from '../../services/provincia-service';
 
 @Component({
   selector: 'app-inserimento-comuni',
@@ -12,6 +13,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './inserimento-comuni.css'
 })
 export class InserimentoComuni {
+
+  province:Provincia[]=new Array();
+
   prov:Provincia={ sigla_provincia: '' };
   cod?:number;
   denia?:string;
@@ -24,7 +28,14 @@ export class InserimentoComuni {
   sup?:string;
   cods?:number;
 
-  constructor(private serviceComuni: ComuniProvinciaService){}
+  constructor(private serviceComuni: ComuniProvinciaService, private serviceProvince: ProvinciaService){}
+
+  ngOnInit(){
+    this.serviceProvince.Lista().then(ris=>{
+      this.province=ris;
+      console.log(this.province.length);
+    })
+  }
 
   InserisciComune():void{
       let comune: Comune ={

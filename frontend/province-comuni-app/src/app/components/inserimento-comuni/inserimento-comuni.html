@@ -9,7 +9,11 @@
 
         <div class="form-group mt-2">
             <label>Provincia</label>
-            <input type="text" class="form-control" id="prov" [(ngModel)]="prov.sigla_provincia">
+            <select name="province" id="prov" [(ngModel)]="prov.sigla_provincia" class="form-control">
+                <option *ngFor="let p of province" [value]="p.sigla_provincia">
+                    {{p.sigla_provincia}}
+                </option>
+            </select>
         </div>
 
         <div class="form-group mt-2">
