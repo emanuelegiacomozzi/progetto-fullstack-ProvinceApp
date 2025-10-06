@@ -43,7 +43,7 @@ export class InserimentoComuni {
 
     this.serviceComuni.Inserimento(comune).then(ris=>{
       if(ris){
-        alert("Comune di " + comune.denominazione_ita_altra + " inserito correttamente nella provincia di " + comune.provincia?.denominazione_provincia);
+        alert("Comune di " + comune.denominazione_ita_altra + " inserito correttamente nella provincia di " + comune.provincia?.sigla_provincia);
         console.log("Dati inseriti: ", comune);
       }
       else{
