@@ -12,3 +12,4 @@ backend/.settings/
 *.log
 *.env
 .DS_Store
+/.metadata/
