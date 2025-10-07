@@ -123,9 +123,14 @@ body,html{
 
 @media (max-width: 840px){
   .header{
+    gap:20px;
     flex-direction: column;
     align-items: stretch;
     padding: 10px 20px;
+  }
+
+  .title{
+    margin-left: 15px;
   }
 
   .top-bar {
@@ -139,8 +144,7 @@ body,html{
     display: none;
     flex-direction: row;
     width: 200px;
-    background-color: blue;
-    padding: 10px 0;
+    margin:0;
   }
 
   .menu.active {
@@ -158,13 +162,18 @@ body,html{
   }
 
   .dropdown {
-    width: 100%;
+    position: relative;
   }
 
   .dropdown-content {
-    position: static;
-    box-shadow: none;
+    display: none;
+    position: absolute;
     background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 100%;
+    left: 0;
   }
 
   .dropbtn {
@@ -176,9 +185,10 @@ body,html{
   }
 
   .dropdown-content {
-    position: static;
-    box-shadow: none;
+    position: absolute;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
     background-color: #f9f9f9;
+    z-index:1;
   }
 
   .dropdown-content a {

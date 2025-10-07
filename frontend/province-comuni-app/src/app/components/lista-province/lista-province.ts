@@ -39,6 +39,16 @@ export class ListaProvince {
       return;
     }
     if(sigla_provincia){
+      if(provincia.numero_comuni !== undefined && provincia.numero_comuni === 0){
+        this.service.Eliminazione(sigla_provincia).then(ris=>{
+            if(ris){
+              alert(`Provincia di ${provincia.denominazione_provincia} eliminata correttamente`);
+              this.RefreshLista();
+            }else{
+              alert("Errore durante l'eliminazione");
+            }
+          })
+      }
       if(provincia.numero_comuni !== undefined && provincia.numero_comuni > 0){
         if(confirm("La provincia di " + provincia.denominazione_provincia+ " contiene dei comuni\nVuoi continuare con l'eliminazione?")){
           this.service.Eliminazione(sigla_provincia).then(ris=>{

@@ -11,15 +11,23 @@ import { FormsModule } from '@angular/forms';
 })
 export class InserimentoProvincia {
 
+  province:Provincia[] = new Array();
+
   cod_reg?:number;
   sigla?:string;
   denom?:string;
   tip?:string;
-  num_com?:number;
+  num_com?:number=0;
   sup_kmq?:string;
   cod_sov?:number;
 
   constructor(private service:ProvinciaService){}
+
+  ngOnInit(){
+    this.service.Lista().then(ris=>{
+      this.province = ris;
+    })
+  }
 
   Inserisci():void{
     let provincia:Provincia={

@@ -55,6 +55,8 @@ public class ServiceComuneImpl implements ServiceComuneInterface{
 			System.out.println("Salvataggio nuovo comune: " + comune);
 			comune.setProvincia(provinciaOpt.get());
 			dao.save(comune);
+			Provincia provincia = comune.getProvincia(); 
+			provincia.setNumero_comuni(provincia.getNumero_comuni()+1);
 			return true;
 		}
 		
@@ -68,6 +70,8 @@ public class ServiceComuneImpl implements ServiceComuneInterface{
 			Comune comune = opt.get();
 			System.out.println("Comune esistente");
 			dao.delete(comune);
+			Provincia provincia = comune.getProvincia(); 
+			provincia.setNumero_comuni(provincia.getNumero_comuni()-1);
 			return true;
 		}else {
 			System.out.println("Il comune non esiste");
